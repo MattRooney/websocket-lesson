@@ -14,10 +14,35 @@ server.listen(port, function () {
 const socketIo = require('socket.io');
 const io = socketIo(server)
 
+var votes = {};
+
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
   res.sendFile(__direname + '/public/index.html');
+});
+
+io.on('connection', function (socket) {
+  console.log('A user has connected.', io.engine.clientsCount);
+
+  io.sockets.emit('usersConnected', io.engine.clientsCount);
+
+  socket.emit('statusMessage', 'You have connected.');
+
+  socket.on('disconnect', function () {
+    console.log('A user has disconnected.', io.engine.clientsCount);
+    delete votes[socket.id];
+    console.log(votes);
+    io.sockets.emit('userConnection', io.engine.clientsCount);
+  });
+
+  socket.on('message', function (channel, message) {
+    if (channel === 'voteCast') {
+      votes[socket.id] = message;
+      console.log(votes);
+    }
+  });
+
 });
 
 module.exports = server;
