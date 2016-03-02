@@ -28,6 +28,9 @@
     "socket.io": "^1.4.5"
   },
   "devDependencies": {
-    "jquery": "^2.2.1"
+    "chai": "^3.5.0",
+    "jquery": "^2.2.1",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
   }
 }
