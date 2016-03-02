@@ -23,7 +23,14 @@
   "homepage": "https://github.com/MattRooney/websocket-lesson#readme",
   "dependencies": {
     "express": "^4.13.4",
+    "jQuery": "^1.7.4",
     "lodash": "^4.6.0",
     "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jquery": "^2.2.1",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
   }
 }

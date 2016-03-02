@@ -15,6 +15,7 @@ const socketIo = require('socket.io');
 const io = socketIo(server)
 
 var votes = {};
+var _ = require('lodash');
 
 app.use(express.static('public'));
 
@@ -32,6 +33,7 @@ io.on('connection', function (socket) {
   socket.on('message', function (channel, message) {
     if (channel === 'voteCast') {
       votes[socket.id] = message;
+      socket.emit('currentVote', message);
       socket.emit('voteCount', countVotes(votes));
     }
   });
